@@ -1,16 +1,3 @@
----
-AIGC:
-    Label: "1"
-    ContentProducer: 001191440300708461136T1XGW3
-    ProduceID: b39d940f30a0c1cf547a23c927f28498_6a7af4c4e23011f1a768525400cd780f
-    ReservedCode1: 7vEc0iigDb0mlTA/fML9F4HxJOPw6Hm0q0j3LQVuiyfsJFYEvtgJQy0m4vU6H6Zz4/9dQGVe7WIWVK1tWTv+cjPmpLnQMRZ6A4dbv29SnrQS2ToTtffDKv3AfMvwZt9HRDGKhz7doMj5ZM57g6eDyvvITlIOCZ/mW7kp5UOBTjlkFfRJwzZzWhe9jDQ=
-    ContentPropagator: 001191440300708461136T1XGW3
-    PropagateID: b39d940f30a0c1cf547a23c927f28498_6a7af4c4e23011f1a768525400cd780f
-    ReservedCode2: 7vEc0iigDb0mlTA/fML9F4HxJOPw6Hm0q0j3LQVuiyfsJFYEvtgJQy0m4vU6H6Zz4/9dQGVe7WIWVK1tWTv+cjPmpLnQMRZ6A4dbv29SnrQS2ToTtffDKv3AfMvwZt9HRDGKhz7doMj5ZM57g6eDyvvITlIOCZ/mW7kp5UOBTjlkFfRJwzZzWhe9jDQ=
----
-
-
-
 # 爽哥面板隧道助手 v2.3
 
 ## 一句话介绍
@@ -164,8 +151,3 @@ pyinstaller --clean --noconfirm 爽哥面板隧道助手.spec
 - 程序采用 `StrictHostKeyChecking=no` 仅为降低初次连接门槛，生产环境建议自行配置 `known_hosts` 严格校验
 - 使用本工具产生的任何后果（含配置错误、端口暴露、数据损失）由使用者自行承担，作者不提供任何担保
 - 项目中出现的端口号、IP 均为示例值，与作者实际部署环境无关
-
----
-
-*（内容由AI生成，仅供参考）*
-*（内容由AI生成，仅供参考）*
