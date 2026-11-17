@@ -1,0 +1,37 @@
+# ===== 私有配置与凭据（绝不入库）=====
+config.json
+server_key
+*.pem
+*.ppk
+id_rsa*
+id_ed25519*
+*.key
+password*
+*_enc.txt
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+*.egg-info/
+
+# ===== PyInstaller 构建产物 =====
+build/
+dist/
+*.spec.bak
+warn-*.txt
+
+# ===== 日志与临时文件 =====
+*.log
+build_log*.txt
+temp/
+temp_verify/
+*.tmp
+
+# ===== 编辑器 / 系统 =====
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini

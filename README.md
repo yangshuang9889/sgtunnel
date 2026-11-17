@@ -1,0 +1,168 @@
+---
+AIGC:
+    Label: "1"
+    ContentProducer: 001191440300708461136T1XGW3
+    ProduceID: b39d940f30a0c1cf547a23c927f28498_e98f2164d98611f1bff2525400cd780f
+    ReservedCode1: ZN9FTmuc1RogkxYyPoSwQ6yXCpk7s+uWNwSsnt628yj7oeZ3Jd+9EbGNhuuPunhPBpO3GwkMmOMknS3our8oxvo6TYHs62FPfgMJmZflbPrPhcKQohaJAUehxzoXkrRwL/FgTvHVqgDgTky9eZW58uaSm1yIU6aXZb53xPBlXuyiqQr0sP2zBZEnobA=
+    ContentPropagator: 001191440300708461136T1XGW3
+    PropagateID: b39d940f30a0c1cf547a23c927f28498_e98f2164d98611f1bff2525400cd780f
+    ReservedCode2: ZN9FTmuc1RogkxYyPoSwQ6yXCpk7s+uWNwSsnt628yj7oeZ3Jd+9EbGNhuuPunhPBpO3GwkMmOMknS3our8oxvo6TYHs62FPfgMJmZflbPrPhcKQohaJAUehxzoXkrRwL/FgTvHVqgDgTky9eZW58uaSm1yIU6aXZb53xPBlXuyiqQr0sP2zBZEnobA=
+---
+
+# 爽哥面板隧道助手 v2.3
+
+## 一句话介绍
+
+一键建立 SSH 隧道，从本地安全访问远程服务器上的多个管理面板（1Panel、雷池 WAF 等）。
+
+---
+
+## 为什么需要它？
+
+服务器是动态公网地址，无法固定白名单。直接把 1Panel（40001）、雷池面板（16002）暴露到公网等于把管理后台敞开大门。
+
+这个工具通过 SSH 端口转发，在本地 `127.0.0.1` 建立加密隧道，所有流量走 SSH 通道，面板端口对外关闭、仅隧道可达，网站访问零感知。
+
+---
+
+## 核心功能
+
+| 功能         | 说明                                                         |
+| ------------ | ------------------------------------------------------------ |
+| **多面板切换** | 下拉选择面板（1Panel 40001 / 雷池 16002），本地/远程端口随选择自动联动 |
+| **认证方式** | 密钥认证 / 密码认证单选，互斥切换；密码只在内存与环境变量中流转，不落盘、不进命令行、不打日志 |
+| **启动隧道** | SSH 连接远程服务器，建立本地端口转发                 |
+| **停止隧道** | 优雅终止 SSH 进程，释放本地端口                              |
+| **打开面板** | 自动检测隧道状态后在浏览器中打开当前面板                     |
+| **保存配置** | 将当前填写的服务器与面板信息写回 config.json；密码经 Windows DPAPI 加密后以 `password_enc` 保存 |
+| **重新加载** | 运行时随时重读配置文件刷新界面                     |
+| **自动修复密钥权限** | 私钥权限异常时自动执行 icacls 修复，避免 Bad permissions     |
+| **健康检查** | 每 2 秒轮询本地端口连通性，进程异常时自动断开并提示           |
+| **赞助支持卡片** | 界面右侧展示收款二维码，纯展示、不影响任何操作               |
+
+---
+
+## 配置文件（config.json）
+
+工具的所有参数都来自同目录下的 `config.json`，没有写死任何默认值（版本号由程序内常量 `APP_VER` 固定，随版本发布固定）：
+
+```json
+{
+    "server": "你的服务器IP",
+    "ssh_port": "22022",
+    "user": "root",
+    "key_path": "server_key",
+    "auth_method": "key",
+    "password_enc": "（保存密码后自动写入的 DPAPI 密文，可留空）",
+    "panels": [
+        {
+            "name": "1Panel 面板",
+            "local_port": "40001",
+            "remote_port": "40001"
+        },
+        {
+            "name": "雷池面板",
+            "local_port": "16002",
+            "remote_port": "16002"
+        }
+    ],
+    "current": "1Panel 面板"
+}
+```
+
+- `server` / `ssh_port` / `user`：SSH 连接目标
+- `key_path`：SSH 私钥文件路径（支持相对路径，自动定位到 exe 同目录）
+- `auth_method`：`key`（密钥认证）或 `password`（密码认证），缺省按 `key` 处理
+- `password_enc`：密码的 DPAPI 密文（绑定当前 Windows 用户账户，换机/换用户需重新输入密码）；程序不会把明文密码写入此文件
+- `panels`：面板数组，每项含名称与本地/远程端口
+- `current`：当前选中的面板名（下拉框显示纯名称，不带端口后缀）
+
+修改配置后点「重新加载」即可生效，无需重启程序。新增面板只需在 `panels` 里加一项。空值不会被回填默认值（"空即空"）。
+
+---
+
+## 使用方式
+
+1. 将 `爽哥面板隧道助手.exe`、`server_key`、`config.json` 放在同一目录（配置文件可从仓库的 `config.example.json` 复制后按自己的服务器信息填写）
+2. 双击运行程序
+3. 若同目录缺少 `config.json`，界面各字段会留空并给出提示，手工创建或补齐配置后点「重新加载」
+4. 选择认证方式（密钥 / 密码）后下拉选择目标面板，点击「启动隧道」→ 状态变绿即连接成功
+5. 点击「打开面板」在浏览器中访问对应管理后台
+
+---
+
+## 目录结构
+
+```
+爽哥面板隧道助手/
+├── sgtunnel.py                 # 主程序（单文件单类 TunnelApp，纯 tkinter + 标准库）
+├── 爽哥面板隧道助手.spec        # PyInstaller 打包脚本
+├── assets/                     # 图标（ico / 多尺寸 png）与赞助二维码
+├── config.example.json         # 配置模板，复制为 config.json 后填写
+├── docs/
+│   ├── 项目介绍.md              # 项目设计思路与使用说明
+│   └── 开发手册.md              # 完整开发手册（架构、模块地图、排障、版本记录）
+├── LICENSE                     # MIT
+└── README.md
+```
+
+运行时私有文件（已被 `.gitignore` 排除，不会入库）：`config.json`、`server_key`。
+
+## 从源码运行 / 打包
+
+```bash
+# 运行（需要 Python 3.11+，无第三方依赖）
+python sgtunnel.py
+
+# 打包为单文件 exe（需要 pip install pyinstaller）
+pyinstaller --clean --noconfirm 爽哥面板隧道助手.spec
+```
+
+打包产物为单文件 exe，图标与二维码资源已内嵌，分发时无需附带 `assets` 目录，但需要把 `config.json` 与私钥放在 exe 同目录。
+
+## 技术细节
+
+- **GUI**：Python tkinter，暗色主题，大按钮适配脚操作
+- **打包**：PyInstaller 单文件 exe，约 11.1 MB（图标与二维码资源已内嵌，无需附带 assets 目录）
+- **零第三方依赖**：源码无顶层 `import PIL`，DPAPI 由 `ctypes` 直调系统 `crypt32` / `kernel32` 实现；spec 的 `excludes` 显式排除 PIL 与 numpy
+- **SSH 参数**：StrictHostKeyChecking=no、ServerAliveInterval=30、ExitOnForwardFailure=yes
+- **后台运行**：窗口隐藏模式，无控制台弹窗
+- **配置驱动**：界面值全部来自 config.json，禁止代码写死
+
+---
+
+## 版本历史
+
+- **v2.3（2026-11-06 修订）**：报错提示全面中文化——`ssh` 输出、退出码、端口占用、参数校验失败一律给出"人话结论 + 下一步动作"两段式说明，不再是英文原文与裸 `code 255`
+- **v2.3**：新增赞助支持卡片（二维码随包分发）、自制应用图标（最终采用用户原图直出，窗口与 exe 双通道生效）；沿用 v2.2 的密码加密存储
+- **v2.2**：密码改为 Windows DPAPI 加密存储（`password_enc`），重启自动回填，换机自动降级提示
+- **v2.1**：新增认证方式单选（密钥 / 密码）、密码经 SSH_ASKPASS 递交、启动前参数聚合校验、后台线程改用队列驱动 UI、版本号常量化
+- **v2.0**：新增多面板下拉切换（纯名称显示）、端口联动、自动修复密钥权限
+- **v1.x**：单面板版本，仅支持 1Panel
+
+## 开源许可
+
+本项目基于 [MIT License](LICENSE) 开源，Copyright (c) 2026 杨爽工作室。
+
+你可以自由使用、修改、分发本项目（包括商业用途），只需保留原始版权声明与许可声明。
+
+## 参与贡献
+
+欢迎提 Issue 反馈问题或建议。提 PR 前请留意几条约定：
+
+- **零第三方依赖**：不新增顶层 `import PIL` / `numpy` / `pywin32`；DPAPI 保持 `ctypes` 直调
+- **单文件结构**：主程序维持 `sgtunnel.py` 单文件、`TunnelApp` 单类
+- **配置驱动**：界面字段值来自 `config.json`，不在代码里写死默认值
+- **改码同步改文档**：源码一旦改动，`docs/开发手册.md` 对应章节与行号引用需同步更新
+- **不要提交** `config.json`、`server_key` 或任何真实服务器地址、端口、口令
+
+## 免责声明
+
+- 本工具仅用于**管理你自己拥有或已获得授权**的服务器，请遵守当地法律法规与服务商条款
+- 程序采用 `StrictHostKeyChecking=no` 仅为降低初次连接门槛，生产环境建议自行配置 `known_hosts` 严格校验
+- 使用本工具产生的任何后果（含配置错误、端口暴露、数据损失）由使用者自行承担，作者不提供任何担保
+- 项目中出现的端口号、IP 均为示例值，与作者实际部署环境无关
+
+---
+
+*（内容由AI生成，仅供参考）*

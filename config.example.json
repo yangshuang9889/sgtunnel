@@ -1,0 +1,21 @@
+{
+    "server": "你的服务器IP或域名",
+    "ssh_port": "22",
+    "user": "root",
+    "key_path": "server_key",
+    "auth_method": "key",
+    "password_enc": "",
+    "panels": [
+        {
+            "name": "1Panel 面板",
+            "local_port": "40001",
+            "remote_port": "40001"
+        },
+        {
+            "name": "雷池面板",
+            "local_port": "16002",
+            "remote_port": "16002"
+        }
+    ],
+    "current": "1Panel 面板"
+}
