@@ -2,12 +2,14 @@
 AIGC:
     Label: "1"
     ContentProducer: 001191440300708461136T1XGW3
-    ProduceID: b39d940f30a0c1cf547a23c927f28498_e98f2164d98611f1bff2525400cd780f
-    ReservedCode1: ZN9FTmuc1RogkxYyPoSwQ6yXCpk7s+uWNwSsnt628yj7oeZ3Jd+9EbGNhuuPunhPBpO3GwkMmOMknS3our8oxvo6TYHs62FPfgMJmZflbPrPhcKQohaJAUehxzoXkrRwL/FgTvHVqgDgTky9eZW58uaSm1yIU6aXZb53xPBlXuyiqQr0sP2zBZEnobA=
+    ProduceID: b39d940f30a0c1cf547a23c927f28498_6a7af4c4e23011f1a768525400cd780f
+    ReservedCode1: 7vEc0iigDb0mlTA/fML9F4HxJOPw6Hm0q0j3LQVuiyfsJFYEvtgJQy0m4vU6H6Zz4/9dQGVe7WIWVK1tWTv+cjPmpLnQMRZ6A4dbv29SnrQS2ToTtffDKv3AfMvwZt9HRDGKhz7doMj5ZM57g6eDyvvITlIOCZ/mW7kp5UOBTjlkFfRJwzZzWhe9jDQ=
     ContentPropagator: 001191440300708461136T1XGW3
-    PropagateID: b39d940f30a0c1cf547a23c927f28498_e98f2164d98611f1bff2525400cd780f
-    ReservedCode2: ZN9FTmuc1RogkxYyPoSwQ6yXCpk7s+uWNwSsnt628yj7oeZ3Jd+9EbGNhuuPunhPBpO3GwkMmOMknS3our8oxvo6TYHs62FPfgMJmZflbPrPhcKQohaJAUehxzoXkrRwL/FgTvHVqgDgTky9eZW58uaSm1yIU6aXZb53xPBlXuyiqQr0sP2zBZEnobA=
+    PropagateID: b39d940f30a0c1cf547a23c927f28498_6a7af4c4e23011f1a768525400cd780f
+    ReservedCode2: 7vEc0iigDb0mlTA/fML9F4HxJOPw6Hm0q0j3LQVuiyfsJFYEvtgJQy0m4vU6H6Zz4/9dQGVe7WIWVK1tWTv+cjPmpLnQMRZ6A4dbv29SnrQS2ToTtffDKv3AfMvwZt9HRDGKhz7doMj5ZM57g6eDyvvITlIOCZ/mW7kp5UOBTjlkFfRJwzZzWhe9jDQ=
 ---
+
+
 
 # 爽哥面板隧道助手 v2.3
 
@@ -165,4 +167,5 @@ pyinstaller --clean --noconfirm 爽哥面板隧道助手.spec
 
 ---
 
+*（内容由AI生成，仅供参考）*
 *（内容由AI生成，仅供参考）*
