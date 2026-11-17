@@ -6,6 +6,19 @@
 
 ---
 
+## 下载
+
+| 版本 | 文件 | 适用平台 |
+| ---- | ---- | -------- |
+| V2.3 | [sgtunnel-v2.3-win64.exe](https://github.com/yangshuang9889/sgtunnel/releases/download/v2.3/sgtunnel-v2.3-win64.exe) | Windows x64 |
+
+- 全部版本与更新记录见 [Releases](https://github.com/yangshuang9889/sgtunnel/releases)
+- V2.3 文件大小 11,704,565 字节，SHA256：`5E2C2C0D069B9F24C9E130582DEC3381421B1F53E9AE1116FB69A559CDE1E3A6`
+- 发布版为 PyInstaller 打包的单文件 exe，免安装、无需 Python 环境；也可直接以源码方式运行 `sgtunnel.py`
+- Release 资产名统一使用英文，下载后可直接双击运行；从源码自行打包时产物名为 `爽哥面板隧道助手.exe`
+
+---
+
 ## 为什么需要它？
 
 服务器是动态公网地址，无法固定白名单。直接把 1Panel（40001）、雷池面板（16002）暴露到公网等于把管理后台敞开大门。
